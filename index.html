@@ -25,7 +25,7 @@ import { RGBELoader } from 'https://threejs.org/examples/jsm/loaders/RGBELoader.
 import { RoughnessMipmapper } from 'https://threejs.org/examples/jsm/utils/RoughnessMipmapper.js';
 
 			var container, controls;
-			var camera, scene, renderer;
+			var camera, scene, renderer, spotLight;
 
 			init();
 			render();
@@ -37,15 +37,24 @@ import { RoughnessMipmapper } from 'https://threejs.org/examples/jsm/utils/Rough
 
 			
 
-				camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 1000);
-    camera.position.x = 6;
-    camera.position.y = 3;
-    camera.position.z = 8;
-    camera.zoom = 3;
+		camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 1000);
+		camera.position.x = 6;
+		camera.position.y = 3;
+		camera.position.z = 8;
+		camera.zoom = 3;
         camera.updateProjectionMatrix();
 
 				scene = new THREE.Scene();
 
+				spotLight = new THREE.SpotLight( 0xffffff,4, 29 );
+    spotLight.decay = 1;
+    spotLight.position.set(-3,1,7); //(x,vertical,z)
+				scene.add(spotLight)
+
+				var spotLight2 = new THREE.SpotLight( 0xffffff,6, 21 );
+    spotLight2.decay = 1;
+    spotLight2.position.set(6,1,7); //(x,vertical,z)
+				scene.add(spotLight2)
 				new RGBELoader()
 					.setDataType( THREE.UnsignedByteType )
 					.setPath( 'textures/equirectangular/' )
