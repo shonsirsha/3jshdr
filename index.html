@@ -23,15 +23,21 @@ import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitCo
 import { GLTFLoader } from 'https://threejs.org/examples/jsm/loaders/GLTFLoader.js';
 import { RGBELoader } from 'https://threejs.org/examples/jsm/loaders/RGBELoader.js';
 import { RoughnessMipmapper } from 'https://threejs.org/examples/jsm/utils/RoughnessMipmapper.js';
+import { EffectComposer } from 'https://threejs.org/examples/jsm/postprocessing/EffectComposer.js';
+
+import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPass.js';
 
 			var container, controls;
 			var camera, scene, renderer, spotLight;
+			var composer;
 
 			init();
 			render();
 
 
 			function init() {
+
+
 
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
@@ -63,17 +69,17 @@ import { RoughnessMipmapper } from 'https://threejs.org/examples/jsm/utils/Rough
     spotLight.position.set(-3,1,7); //(x,vertical,z)
 				scene.add(spotLight)
 
-				var spotLight2 = new THREE.SpotLight( 0xffffff,6, 29 );
+				var spotLight2 = new THREE.SpotLight( 0xffffff,6, 31 );
     spotLight2.decay = 1;
     spotLight2.position.set(6,1,7); //(x,vertical,z)
 				scene.add(spotLight2)
 				var pHelper2 = new PLHelper( 0.5 , 0xff55dd );
 
-	// 			var pointLight = new THREE.SpotLight( 0x1BA0FC, 25, 20 );
-    // pointLight.position.set(-3,0,-3); //(x,vertical,z)
-    // pointLight.castShadow = true;
-    //     scene.add(pointLight);
-	// 	pointLight.add(pHelper2)
+				var pointLight = new THREE.SpotLight( 0xE2F3FF, 40, 20 );
+    pointLight.position.set(-1,0,-7); //(x,vertical,z)
+    pointLight.castShadow = true;
+        // scene.add(pointLight);
+		pointLight.add(pHelper2)
   let fontLoader = new THREE.FontLoader();
     fontLoader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/din.json', function ( font ) {
         var geometry = new THREE.TextGeometry( 'Für die Kinder, die', {
@@ -183,7 +189,13 @@ import { RoughnessMipmapper } from 'https://threejs.org/examples/jsm/utils/Rough
 						pmremGenerator.dispose();
 
 						render();
+						var width = window.innerWidth;
+				var height = window.innerHeight;
 
+						composer = new EffectComposer( renderer );
+						var ssaoPass = new SSAOPass( scene, camera, width, height );
+						ssaoPass.kernelRadius = 16;
+						composer.addPass( ssaoPass );
 						// model
 
 						// use of RoughnessMipmapper is optional
