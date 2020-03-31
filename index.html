@@ -194,8 +194,9 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
 
 						composer = new EffectComposer( renderer );
 						var ssaoPass = new SSAOPass( scene, camera, width, height );
-						ssaoPass.kernelRadius = 16;
-						composer.addPass( ssaoPass );
+				ssaoPass.kernelRadius = 16;
+				composer.addPass( ssaoPass );
+				ssaoPass.output = parseInt(  SSAOPass.OUTPUT.Default );
 						// model
 
 						// use of RoughnessMipmapper is optional
