@@ -85,7 +85,7 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
     fontLoader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/DIN_CONDENSED_BOLD.json', function ( font ) {
         var geometry = new THREE.TextGeometry( 'Für die Kinder, die', {
         font: font,
-        size: 0.15,
+        size: 0.18,
         height: 0.007,
         curveSegments: 3,
       } );
@@ -98,62 +98,62 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
 
 	  var geometry2 = new THREE.TextGeometry( 'morgens zur Schule müssen, die', {
         font: font,
-        size: 0.15,
+        size: 0.18,
         height: 0.0001,
         curveSegments: 3,
       } );
       geometry2.center();
       var material2 = new THREE.MeshBasicMaterial({color: 0x000000});
       var mesh2 = new THREE.Mesh(geometry2, material2);
-      mesh2.position.set( 1.43,2.52,0.05);
+      mesh2.position.set( 1.50,2.49,0.05);
       mesh2.rotation.y -= Math.PI/168;
 
 	  var geometry3 = new THREE.TextGeometry( 'Eltern, die zur Arbeit fahren und', {
         font: font,
-        size: 0.15,
+        size: 0.18,
         height: 0.007,
         curveSegments: 3,
       } );
       geometry3.center();
       var material3 = new THREE.MeshBasicMaterial({color: 0x000000});
       var mesh3 = new THREE.Mesh(geometry3, material3);
-      mesh3.position.set( 1.41,2.24 ,0.05);
+      mesh3.position.set( 1.45,2.18 ,0.05);
       mesh3.rotation.y -= Math.PI/168;
 
 	  var geometry4 = new THREE.TextGeometry( 'die Betriebe, die ihre Waren und', {
         font: font,
-        size: 0.15,
+        size: 0.18,
         height: 0.007,
         curveSegments: 3,
       } );
       geometry4.center();
       var material4 = new THREE.MeshBasicMaterial({color: 0x000000});
       var mesh4 = new THREE.Mesh(geometry4, material4);
-      mesh4.position.set( 1.41,1.94 ,0.05);
+      mesh4.position.set( 1.45,1.83 ,0.05);
       mesh4.rotation.y -= Math.PI/168;
 
 	  var geometry5 = new THREE.TextGeometry( 'Dienstleistungen in ganz Europa', {
         font: font,
-        size: 0.15,
+        size: 0.18,
         height: 0.007,
         curveSegments: 3,
       } );
       geometry5.center();
       var material5 = new THREE.MeshBasicMaterial({color: 0x000000});
       var mesh5 = new THREE.Mesh(geometry5, material5);
-      mesh5.position.set( 1.40,1.62 ,0.05);
+      mesh5.position.set( 1.45,1.48 ,0.05);
       mesh5.rotation.y -= Math.PI/168;
 
 	  var geometry6 = new THREE.TextGeometry( 'anbieten möchten.', {
         font: font,
-        size: 0.15,
+        size: 0.18,
         height: 0.007,
         curveSegments: 3,
       } );
       geometry6.center();
       var material6 = new THREE.MeshBasicMaterial({color: 0x000000});
       var mesh6 = new THREE.Mesh(geometry6, material6);
-      mesh6.position.set( 0.95,1.36 ,0.05);
+      mesh6.position.set( 0.92,1.18 ,0.05);
       mesh6.rotation.y -= Math.PI/168;
 
       scene.add(mesh,mesh2,mesh3,mesh4,mesh5,mesh6)
