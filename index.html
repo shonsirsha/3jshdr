@@ -159,22 +159,22 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
       scene.add(mesh,mesh2,mesh3,mesh4,mesh5,mesh6)
     });
 
-	fontLoader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/din.json', function ( font ) {
-      var geometry7 = new THREE.TextGeometry( 'Für innovative und vielfältige Mobilität', {
-        font: font,
-        size: 0.09,
-        height: 0.007,
-        curveSegments: 3,
-      } );
+	// fontLoader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/din.json', function ( font ) {
+  //     var geometry7 = new THREE.TextGeometry( 'Für innovative und vielfältige Mobilität', {
+  //       font: font,
+  //       size: 0.09,
+  //       height: 0.007,
+  //       curveSegments: 3,
+  //     } );
 
-      geometry7.center();
-      var material7 = new THREE.MeshBasicMaterial({color: 0x0544f2});
-      var mesh7 = new THREE.Mesh( geometry7, material7 );
-      mesh7.position.set( 1.32 , 0.66 ,0.05);
-      mesh7.rotation.y -= Math.PI/168;
+  //     geometry7.center();
+  //     var material7 = new THREE.MeshBasicMaterial({color: 0x0544f2});
+  //     var mesh7 = new THREE.Mesh( geometry7, material7 );
+  //     mesh7.position.set( 1.32 , 0.66 ,0.05);
+  //     mesh7.rotation.y -= Math.PI/168;
 
-      scene.add(mesh7)
-    });
+  //     scene.add(mesh7)
+  //   });
 
 				new RGBELoader()
 					.setDataType( THREE.UnsignedByteType )
