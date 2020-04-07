@@ -194,9 +194,14 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
 						pmremGenerator.dispose();
 
 						render();
-				
+						var width = window.innerWidth;
+				var height = window.innerHeight;
 
-						
+						composer = new EffectComposer( renderer );
+						var ssaoPass = new SSAOPass( scene, camera, width, height );
+				ssaoPass.kernelRadius = 16;
+				composer.addPass( ssaoPass );
+				ssaoPass.output = parseInt(  SSAOPass.OUTPUT.Default );
 
         var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
 var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
@@ -207,8 +212,8 @@ var cube = new THREE.Mesh( geometry, material );
 						// use of RoughnessMipmapper is optional
 						var roughnessMipmapper = new RoughnessMipmapper( renderer );
 
-						var loader = new GLTFLoader().setPath( 'test/' );
-						loader.load( 'Trennwand.glb', function ( gltf ) {
+						var loader = new GLTFLoader().setPath( 'glTF/' );
+						loader.load( 'FDP.glb', function ( gltf ) {
 
 							gltf.scene.traverse( function ( child ) {
 
@@ -228,44 +233,6 @@ var cube = new THREE.Mesh( geometry, material );
 
 						} );
 
-                        loader.load( 'Boden.glb', function ( gltf ) {
-                gltf.scene.traverse( function ( child ) {
-                    if ( child.isMesh ) {
-                        roughnessMipmapper.generateMipmaps( child.material );
-                    }
-                } );
-
-                scene.add( gltf.scene );
-                roughnessMipmapper.dispose();
-                render();
-            } );
-
-
-            loader.load( 'blaue-Wand.glb', function ( gltf ) {
-                gltf.scene.traverse( function ( child ) {
-                    if ( child.isMesh ) {
-                        roughnessMipmapper.generateMipmaps( child.material );
-                    }
-                } );
-
-                scene.add( gltf.scene );
-                roughnessMipmapper.dispose();
-                render();
-            } );
-
-            loader.load( 'rechte_Wand.glb', function ( gltf ) {
-                gltf.scene.traverse( function ( child ) {
-                    if ( child.isMesh ) {
-                        roughnessMipmapper.generateMipmaps( child.material );
-                    }
-                } );
-
-                scene.add( gltf.scene );
-                roughnessMipmapper.dispose();
-                render();
-            } );
-
-
 					} );
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -279,21 +246,12 @@ var cube = new THREE.Mesh( geometry, material );
 				var pmremGenerator = new THREE.PMREMGenerator( renderer );
 				pmremGenerator.compileEquirectangularShader();
 
-                var width = window.innerWidth;
-				var height = window.innerHeight;
-
-                composer = new EffectComposer( renderer );
-				var ssaoPass = new SSAOPass( scene, camera, width, height );
-				ssaoPass.kernelRadius = 16;
-				composer.addPass( ssaoPass );
-                ssaoPass.output = SSAOPass.OUTPUT.Blur
-
-				// controls = new OrbitControls( camera, renderer.domElement );
-				// controls.addEventListener( 'change', render ); // use if there is no animation loop
-				// controls.minDistance = 2;
-				// controls.maxDistance = 10
-				// controls.target.set( 0, 0, - 0.2 );
-				// controls.update();
+				controls = new OrbitControls( camera, renderer.domElement );
+				controls.addEventListener( 'change', render ); // use if there is no animation loop
+				controls.minDistance = 2;
+				controls.maxDistance = 10
+				controls.target.set( 0, 0, - 0.2 );
+				controls.update();
 
 				window.addEventListener( 'resize', onWindowResize, false );
 
@@ -326,8 +284,6 @@ var cube = new THREE.Mesh( geometry, material );
 
 		</script>
 
-        <div>
-            asdas
-        </div>
+
 	</body>
 </html>
