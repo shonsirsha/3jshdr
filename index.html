@@ -70,9 +70,9 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
     spotLight.position.set(-3,1,7); //(x,vertical,z)
 				scene.add(spotLight)
 
-				var spotLight2 = new THREE.SpotLight( 0xffffff,6, 31 );
+				var spotLight2 = new THREE.SpotLight( 0xffffff,19, 31 );
             spotLight2.decay = 1;
-    spotLight2.position.set(9,1,7); //(x,vertical,z)
+    spotLight2.position.set(15,1,7); //(x,vertical,z)
 				scene.add(spotLight2)
 				var pHelper2 = new PLHelper( 0.5 , 0xff55dd );
 
@@ -243,11 +243,11 @@ var cube = new THREE.Mesh( geometry, material );
 				pmremGenerator.compileEquirectangularShader();
 
 				// controls = new OrbitControls( camera, renderer.domElement );
-				controls.addEventListener( 'change', render ); // use if there is no animation loop
-				controls.minDistance = 2;
-				controls.maxDistance = 10
-				controls.target.set( 0, 0, - 0.2 );
-				controls.update();
+				// controls.addEventListener( 'change', render ); // use if there is no animation loop
+				// controls.minDistance = 2;
+				// controls.maxDistance = 10
+				// controls.target.set( 0, 0, - 0.2 );
+				// controls.update();
 
 				window.addEventListener( 'resize', onWindowResize, false );
 
@@ -268,11 +268,11 @@ var cube = new THREE.Mesh( geometry, material );
 			//
 
 			function render() {
-        console.log("X: " + camera.position.x)
-        console.log("Y: " + camera.position.y)
-        console.log("Z: " + camera.position.z)
-        console.log("Zoom: " + camera.zoom)
-        console.log("aspect:" + camera.aspect)
+        // console.log("X: " + camera.position.x)
+        // console.log("Y: " + camera.position.y)
+        // console.log("Z: " + camera.position.z)
+        // console.log("Zoom: " + camera.zoom)
+        // console.log("aspect:" + camera.aspect)
 
 				renderer.render( scene, camera );
 
