@@ -67,10 +67,8 @@ import { RoughnessMipmapper } from 'https://threejs.org/examples/jsm/utils/Rough
 				scene.background = new THREE.Color( 0xaaaaaa );
 
 				scene.add( new THREE.DirectionalLight() );
-				scene.add( new THREE.HemisphereLight() );
 
-				group = new THREE.Group();
-				scene.add( group );
+			
 
                 var roughnessMipmapper = new RoughnessMipmapper( renderer );
 
@@ -78,13 +76,9 @@ import { RoughnessMipmapper } from 'https://threejs.org/examples/jsm/utils/Rough
 						loader.load( 'Trennwand.glb', function ( gltf ) {
 
 							gltf.scene.traverse( function ( child ) {
-
 								if ( child.isMesh ) {
-
 									roughnessMipmapper.generateMipmaps( child.material );
-
 								}
-
 							} );
 
 							scene.add( gltf.scene );
@@ -95,26 +89,15 @@ import { RoughnessMipmapper } from 'https://threejs.org/examples/jsm/utils/Rough
 
 						} );
 
-				var geometry = new THREE.BoxBufferGeometry( 10, 10, 10 );
+				
 
-				for ( var i = 0; i < 100; i ++ ) {
-
-					var material = new THREE.MeshLambertMaterial( {
-						color: Math.random() * 0xffffff
-					} );
-
-					var mesh = new THREE.Mesh( geometry, material );
-					mesh.position.x = Math.random() * 400 - 200;
-					mesh.position.y = Math.random() * 400 - 200;
-					mesh.position.z = Math.random() * 400 - 200;
-					mesh.rotation.x = Math.random();
-					mesh.rotation.y = Math.random();
-					mesh.rotation.z = Math.random();
-
-					mesh.scale.setScalar( Math.random() * 10 + 2 );
-					group.add( mesh );
-
-				}
+                var geometry = new THREE.BoxBufferGeometry( 30, 30, 30 );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+var cube = new THREE.Mesh( geometry, material );
+cube.position.x = 90
+cube.position.y = 10
+cube.position.z = 340
+scene.add( cube );
 
                 stats = new Stats();
 				container.appendChild( stats.dom );
@@ -125,9 +108,9 @@ import { RoughnessMipmapper } from 'https://threejs.org/examples/jsm/utils/Rough
 				composer = new EffectComposer( renderer );
 
 				var ssaoPass = new SSAOPass( scene, camera, width, height );
-				ssaoPass.kernelRadius = 16;
+				ssaoPass.kernelRadius = 150;
 				composer.addPass( ssaoPass );
-                ssaoPass.output = SSAOPass.OUTPUT.Depth
+                ssaoPass.output = SSAOPass.OUTPUT.Default
 
 
 				// Init gui
@@ -187,9 +170,7 @@ import { RoughnessMipmapper } from 'https://threejs.org/examples/jsm/utils/Rough
 			function render() {
 
 				var timer = performance.now();
-				group.rotation.x = timer * 0.0002;
-				group.rotation.y = timer * 0.0001;
-
+				
 				composer.render();
 
 			}
