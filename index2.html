@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>hdr test</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="main.css">
+        <script src="https://unpkg.com/three"></script>
+<script src="https://threejs.org/build/three.min.js"></script>
+<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/OrbitControls.js"></script>
+<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.module.js"></script> <!--RGBELoader-->
+</head>
+
+	<body>
+
+    <div id="tet">
+
+    </div>
+
+		
+
+		<script type="module">
+
+import * as THREE from 'https://threejs.org/build/three.module.js';
+
+import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'https://threejs.org/examples/jsm/loaders/GLTFLoader.js';
+import { RGBELoader } from 'https://threejs.org/examples/jsm/loaders/RGBELoader.js';
+import { RoughnessMipmapper } from 'https://threejs.org/examples/jsm/utils/RoughnessMipmapper.js';
+import { EffectComposer } from 'https://threejs.org/examples/jsm/postprocessing/EffectComposer.js';
+
+import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPass.js';
+
+			var container, controls;
+			var camera, scene, renderer, spotLight;
+			var composer;
+
+			init();
+			render();
+
+
+			function init() {
+
+
+
+				container = document.getElementById( 'tet' );
+				class PLHelper {
+  constructor( diameter , color , position ){
+    var helper = new THREE.Mesh(
+      new THREE.SphereBufferGeometry( diameter/2 , 5 , 5 ), 
+      new THREE.MeshBasicMaterial({ 
+        color: color
+      })
+    );
+    if( position != undefined ) helper.position.copy( position );
+    return helper;
+  }
+}
+			
+
+		camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 1000);
+		camera.position.x = 2.4396833933569084
+		camera.position.y = 2.108525398189278
+		camera.position.z = 3.17071480046023
+    camera.aspect = 2.0678513731825525
+		camera.zoom = 1.11;
+        camera.updateProjectionMatrix();
+        camera.lookAt( 0.31, 1.78, 0 );
+
+				scene = new THREE.Scene();
+        
+				spotLight = new THREE.SpotLight( 0xffffff,4, 29 );
+    spotLight.decay = 1;
+    spotLight.position.set(-3,1,7); //(x,vertical,z)
+				scene.add(spotLight)
+
+				var spotLight2 = new THREE.SpotLight( 0xffffff,19, 31 );
+            spotLight2.decay = 1;
+    spotLight2.position.set(15,1,7); //(x,vertical,z)
+				scene.add(spotLight2)
+				var pHelper2 = new PLHelper( 0.5 , 0xff55dd );
+
+				var pointLight = new THREE.SpotLight( 0xE2F3FF, 40, 20 );
+    pointLight.position.set(-1,0,-7); //(x,vertical,z)
+    pointLight.castShadow = true;
+        // scene.add(pointLight);
+		pointLight.add(pHelper2)
+  let fontLoader = new THREE.FontLoader();
+    fontLoader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/DIN_CONDENSED_BOLD.json', function ( font ) {
+        var geometry = new THREE.TextGeometry( 'Für die Kinder, die', {
+        font: font,
+        size: 0.175,
+        height: 0.007,
+        curveSegments: 3,
+      } );
+      geometry.center();
+      var material = new THREE.MeshBasicMaterial({color: 0x000000});
+      var mesh = new THREE.Mesh(geometry, material);
+      mesh.position.set(1.15, 2.99 ,0.05);
+      mesh.rotation.y -= Math.PI/168;
+
+
+	  var geometry2 = new THREE.TextGeometry( 'morgens zur Schule müssen, die', {
+        font: font,
+        size: 0.175,
+        height: 0.0001,
+        curveSegments: 3,
+      } );
+      geometry2.center();
+      var material2 = new THREE.MeshBasicMaterial({color: 0x000000});
+      var mesh2 = new THREE.Mesh(geometry2, material2);
+      mesh2.position.set( 1.70,2.69,0.05);
+      mesh2.rotation.y -= Math.PI/168;
+
+	  var geometry3 = new THREE.TextGeometry( 'Eltern, die zur Arbeit fahren und', {
+        font: font,
+        size: 0.175,
+        height: 0.007,
+        curveSegments: 3,
+      } );
+      geometry3.center();
+      var material3 = new THREE.MeshBasicMaterial({color: 0x000000});
+      var mesh3 = new THREE.Mesh(geometry3, material3);
+      mesh3.position.set( 1.68,2.38 ,0.05);
+      mesh3.rotation.y -= Math.PI/168;
+
+	  var geometry4 = new THREE.TextGeometry( 'die Betriebe, die ihre Waren und', {
+        font: font,
+        size: 0.175,
+        height: 0.007,
+        curveSegments: 3,
+      } );
+      geometry4.center();
+      var material4 = new THREE.MeshBasicMaterial({color: 0x000000});
+      var mesh4 = new THREE.Mesh(geometry4, material4);
+      mesh4.position.set( 1.7,2.03 ,0.05);
+      mesh4.rotation.y -= Math.PI/168;
+
+	  var geometry5 = new THREE.TextGeometry( 'Dienstleistungen in ganz Europa', {
+        font: font,
+        size: 0.175,
+        height: 0.007,
+        curveSegments: 3,
+      } );
+      geometry5.center();
+      var material5 = new THREE.MeshBasicMaterial({color: 0x000000});
+      var mesh5 = new THREE.Mesh(geometry5, material5);
+      mesh5.position.set( 1.70,1.68 ,0.05);
+      mesh5.rotation.y -= Math.PI/168;
+
+	  var geometry6 = new THREE.TextGeometry( 'anbieten möchten.', {
+        font: font,
+        size: 0.175,
+        height: 0.007,
+        curveSegments: 3,
+      } );
+      geometry6.center();
+      var material6 = new THREE.MeshBasicMaterial({color: 0x000000});
+      var mesh6 = new THREE.Mesh(geometry6, material6);
+      mesh6.position.set( 1.2,1.38 ,0.05);
+      mesh6.rotation.y -= Math.PI/168;
+
+      scene.add(mesh,mesh2,mesh3,mesh4,mesh5,mesh6)
+    });
+
+	// fontLoader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/DIN_CONDENSED_BOLD.json', function ( font ) {
+  //     var geometry7 = new THREE.TextGeometry( 'Für innovative und vielfältige Mobilität', {
+  //       font: font,
+  //       size: 0.09,
+  //       height: 0.007,
+  //       curveSegments: 3,
+  //     } );
+
+  //     geometry7.center();
+  //     var material7 = new THREE.MeshBasicMaterial({color: 0x0544f2});
+  //     var mesh7 = new THREE.Mesh( geometry7, material7 );
+  //     mesh7.position.set( 1.32 , 0.66 ,0.05);
+  //     mesh7.rotation.y -= Math.PI/168;
+
+  //     scene.add(mesh7)
+  //   });
+
+				new RGBELoader()
+					.setDataType( THREE.UnsignedByteType )
+					.setPath( 'textures/equirectangular/' )
+					.load( 'forest.hdr', function ( texture ) {
+
+						var envMap = pmremGenerator.fromEquirectangular( texture ).texture;
+
+						scene.background = envMap;
+						scene.environment = envMap;
+
+						texture.dispose();
+						pmremGenerator.dispose();
+
+						render();
+				
+
+						
+
+        var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+var cube = new THREE.Mesh( geometry, material );
+
+						// model
+
+						// use of RoughnessMipmapper is optional
+						var roughnessMipmapper = new RoughnessMipmapper( renderer );
+
+						var loader = new GLTFLoader().setPath( 'test/' );
+						loader.load( 'Trennwand.glb', function ( gltf ) {
+
+							gltf.scene.traverse( function ( child ) {
+
+								if ( child.isMesh ) {
+                  child.castShadow = true;
+        child.receiveShadow = true;
+									roughnessMipmapper.generateMipmaps( child.material );
+
+								}
+
+							} );
+
+							scene.add( gltf.scene );
+
+							roughnessMipmapper.dispose();
+
+							render();
+
+						} );
+
+                        loader.load( 'Boden.glb', function ( gltf ) {
+                gltf.scene.traverse( function ( child ) {
+                    if ( child.isMesh ) {
+                        roughnessMipmapper.generateMipmaps( child.material );
+                    }
+                } );
+
+                scene.add( gltf.scene );
+                roughnessMipmapper.dispose();
+                render();
+            } );
+
+
+            loader.load( 'blaue-Wand.glb', function ( gltf ) {
+                gltf.scene.traverse( function ( child ) {
+                    if ( child.isMesh ) {
+                        roughnessMipmapper.generateMipmaps( child.material );
+                    }
+                } );
+
+                scene.add( gltf.scene );
+                roughnessMipmapper.dispose();
+                render();
+            } );
+
+            loader.load( 'rechte_Wand.glb', function ( gltf ) {
+                gltf.scene.traverse( function ( child ) {
+                    if ( child.isMesh ) {
+                        roughnessMipmapper.generateMipmaps( child.material );
+                    }
+                } );
+
+                scene.add( gltf.scene );
+                roughnessMipmapper.dispose();
+                render();
+            } );
+
+
+					} );
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;
+				renderer.toneMappingExposure = 0.8;
+				renderer.outputEncoding = THREE.sRGBEncoding;
+				container.appendChild( renderer.domElement );
+
+				var pmremGenerator = new THREE.PMREMGenerator( renderer );
+				pmremGenerator.compileEquirectangularShader();
+
+                var width = window.innerWidth;
+				var height = window.innerHeight;
+
+                composer = new EffectComposer( renderer );
+				var ssaoPass = new SSAOPass( scene, camera, width, height );
+				ssaoPass.kernelRadius = 150;
+				composer.addPass( ssaoPass );
+        ssaoPass.output = parseInt(  SSAOPass.OUTPUT.Default );
+
+
+				// controls = new OrbitControls( camera, renderer.domElement );
+				// controls.addEventListener( 'change', render ); // use if there is no animation loop
+				// controls.minDistance = 2;
+				// controls.maxDistance = 10
+				// controls.target.set( 0, 0, - 0.2 );
+				// controls.update();
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				render();
+
+			}
+
+			//
+
+			function render() {
+        console.log("X: " + camera.position.x)
+        console.log("Y: " + camera.position.y)
+        console.log("Z: " + camera.position.z)
+        console.log("Zoom: " + camera.zoom)
+        console.log("aspect:" + camera.aspect)
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+
+        <div>
+            asdas
+        </div>
+	</body>
+</html>
