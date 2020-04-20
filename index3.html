@@ -60,13 +60,13 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
 			
 
 		camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 1, 1000);
-		camera.position.x = 2.4396833933569084
-		camera.position.y = 2.108525398189278
+		camera.position.x = 3.134510059495855 
+		camera.position.y = 1.8
 		camera.position.z = 3.17071480046023
     camera.aspect = 2.0678513731825525
-		camera.zoom = 0.8;
+		camera.zoom = 0.85;
         camera.updateProjectionMatrix();
-        camera.lookAt( 0.31, 1.78, 0 );
+        camera.lookAt( 0.31, 1.55, 0 );
 
 				scene = new THREE.Scene();
         
@@ -81,18 +81,21 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
 				scene.add(spotLight2)
 				var pHelper2 = new PLHelper( 0.5 , 0xff55dd );
 
-				var pointLight = new THREE.SpotLight( 0xE2F3FF, 40, 20 );
-    pointLight.position.set(-1,0,-7); //(x,vertical,z)
-    pointLight.castShadow = true;
-        // scene.add(pointLight);
-		pointLight.add(pHelper2)
+		// 		var pointLight = new THREE.PointLight( 0xE2F3FF, 40, 20 );
+    // pointLight.position.set(-1,0,-7); //(x,vertical,z)
+    // pointLight.castShadow = true;
+    //     scene.add(pointLight);
+    // pointLight.add(pHelper2)
+    
+  
+    
   let fontLoader = new THREE.FontLoader();
     fontLoader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/DIN_CONDENSED_BOLD.json', function ( font ) {
         var geometry = new THREE.TextGeometry( 'Für die Kinder, die', {
         font: font,
         size: 0.175,
-        height: 0.007,
-        curveSegments: 3,
+        height: 0.00000001,
+        curveSegments: 10,
       } );
       geometry.center();
       var material = new THREE.MeshBasicMaterial({color: 0x000000});
@@ -104,7 +107,7 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
 	  var geometry2 = new THREE.TextGeometry( 'morgens zur Schule müssen, die', {
         font: font,
         size: 0.175,
-        height: 0.0001,
+        height: 0.00000001,
         curveSegments: 3,
       } );
       geometry2.center();
@@ -116,7 +119,7 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
 	  var geometry3 = new THREE.TextGeometry( 'Eltern, die zur Arbeit fahren und', {
         font: font,
         size: 0.175,
-        height: 0.007,
+        height: 0.00000001,
         curveSegments: 3,
       } );
       geometry3.center();
@@ -128,7 +131,7 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
 	  var geometry4 = new THREE.TextGeometry( 'die Betriebe, die ihre Waren und', {
         font: font,
         size: 0.175,
-        height: 0.007,
+        height: 0.00000001,
         curveSegments: 3,
       } );
       geometry4.center();
@@ -140,7 +143,7 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
 	  var geometry5 = new THREE.TextGeometry( 'Dienstleistungen in ganz Europa', {
         font: font,
         size: 0.175,
-        height: 0.007,
+        height: 0.00000001,
         curveSegments: 3,
       } );
       geometry5.center();
@@ -152,7 +155,7 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
 	  var geometry6 = new THREE.TextGeometry( 'anbieten möchten.', {
         font: font,
         size: 0.175,
-        height: 0.007,
+        height: 0.00000001,
         curveSegments: 3,
       } );
       geometry6.center();
@@ -168,7 +171,7 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
   //     var geometry7 = new THREE.TextGeometry( 'Für innovative und vielfältige Mobilität', {
   //       font: font,
   //       size: 0.09,
-  //       height: 0.007,
+  //       height: 0.00000001,
   //       curveSegments: 3,
   //     } );
 
@@ -291,12 +294,14 @@ var cube = new THREE.Mesh( geometry, material );
         ssaoPass.output = parseInt(  SSAOPass.OUTPUT.Default );
 
 
-				// controls = new OrbitControls( camera, renderer.domElement );
-				// controls.addEventListener( 'change', render ); // use if there is no animation loop
-				// controls.minDistance = 2;
-				// controls.maxDistance = 10
-				// controls.target.set( 0, 0, - 0.2 );
-				// controls.update();
+        controls = new OrbitControls( camera, renderer.domElement );
+        				controls.addEventListener( 'change', render ); // use if there is no animation loop
+
+
+				controls.minDistance = 2;
+				controls.maxDistance = 10
+				controls.target.set( 0, 0, - 0.2 );
+				controls.update();
 
 				window.addEventListener( 'resize', onWindowResize, false );
 
