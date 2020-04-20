@@ -23,7 +23,7 @@
 		<script type="module">
 
 import * as THREE from 'https://threejs.org/build/three.module.js';
-import { TrackballControls } from 'https://threejs.org/examples/jsm/controls/TrackballControls.js';
+
 import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'https://threejs.org/examples/jsm/loaders/GLTFLoader.js';
 import { RGBELoader } from 'https://threejs.org/examples/jsm/loaders/RGBELoader.js';
@@ -34,17 +34,15 @@ import { SSAOPass } from 'https://threejs.org/examples/jsm/postprocessing/SSAOPa
 
 			var container, controls;
             var camera, scene, renderer, spotLight;
-            var cameraCenter = new THREE.Vector3();
             var composer;
-            var cameraHorzLimit = 0.3;
-var cameraVertLimit = 0.3;
-            var mouse = new THREE.Vector2();
+            
+            const mouse = new THREE.Vector2();
+const target = new THREE.Vector2();
+const windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 2 );
 
 
 			init();
             render();
-            animate()
-
 
 			function init() {
 
@@ -69,8 +67,7 @@ var cameraVertLimit = 0.3;
 		camera.position.x = 5.3257092875456715
 		camera.position.y =  1.7203243295945108
         camera.position.z = 5.867643930449958
-        cameraCenter.x = camera.position.x;
-    cameraCenter.y = camera.position.y;
+       
     camera.aspect = 2.0678513731825525
 		camera.zoom = 1.3;
         camera.updateProjectionMatrix();
@@ -302,21 +299,14 @@ var cube = new THREE.Mesh( geometry, material );
         ssaoPass.output = parseInt(  SSAOPass.OUTPUT.Default );
 
 
-        controls = new TrackballControls( camera, renderer.domElement );
-
-                controls.target = new THREE.Vector3( 0.31, 1.8, 0 );
-
-                                controls.update();
-                                        				controls.addEventListener( 'change', render ); // use if there is no animation loop
-
-
         // controls = new OrbitControls( camera, renderer.domElement );
         // 				controls.addEventListener( 'change', render ); // use if there is no animation loop
 
 
 		// 		controls.minDistance = 2;
 		// 		controls.maxDistance = 10
-		// 		controls.update();
+		// 		controls.target.set( 0, 0, - 0.2 );
+				// controls.update();
                 document.addEventListener('mousemove', onDocumentMouseMove, false);
 
 				window.addEventListener( 'resize', onWindowResize, false );
@@ -325,12 +315,14 @@ var cube = new THREE.Mesh( geometry, material );
 
 			function onWindowResize() {
 
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-
-				renderer.setSize( window.innerWidth, window.innerHeight );
-
-				render();
+				const width = window.innerWidth;
+	const height = window.innerHeight;
+  
+  windowHalf.set( width / 2, height / 2 );
+	
+  camera.aspect = width / height;
+	camera.updateProjectionMatrix();
+	renderer.setSize( width, height );
 
 			}
 
@@ -342,30 +334,44 @@ var cube = new THREE.Mesh( geometry, material );
         console.log("Z: " + camera.position.z)
         console.log("Zoom: " + camera.zoom)
         console.log("aspect:" + camera.aspect)
-
+                console.log(camera.rotation.x);
+                console.log(camera.rotation.y)
 				renderer.render( scene, camera );
 
             }
 
-            function animate() {
 
-requestAnimationFrame( animate );
+function animate()
+{   
+//     target.x = ( 1 - mouse.x ) * 0.002;
+//   target.y = ( 1 - mouse.y ) * 0.002;
+  
+//   camera.rotation.x += 0.05 * ( target.y - camera.rotation.x );
+//   camera.rotation.y += 0.05 * ( target.x - camera.rotation.y );
 
-controls.update();
-
-
-render();
-
+//   requestAnimationFrame( animate );
+//   renderer.render( scene, camera );
+   
 }
-
 
 
             
             function onDocumentMouseMove(event) {
     event.preventDefault();
-    console.log("ASDSA")
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+   
+
+    mouse.x = ( event.clientX - windowHalf.x );
+    mouse.y = ( event.clientY - windowHalf.x );
+    
+    target.x = ( 1 - mouse.x ) * 0.002;
+  target.y = ( 1 - mouse.y ) * 0.002;
+  
+  camera.rotation.x += 0.4 * ( target.y - camera.rotation.x );
+  camera.rotation.y += 0.4 * ( target.x - camera.rotation.y );
+
+  requestAnimationFrame( animate );
+  renderer.render( scene, camera );
+  
 }
 
 		</script>
