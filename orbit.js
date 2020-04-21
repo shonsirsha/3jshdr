@@ -16,6 +16,7 @@ import {
 	Vector2,
 	Vector3
 } from "https://threejs.org/build/three.module.js";
+
 // This set of controls performs orbiting, dollying (zooming), and panning.
 // Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
 //
@@ -469,7 +470,7 @@ var OrbitControls = function ( object, domElement ) {
 	// event callbacks - update the object state
 	//
 
-	this.handleMouseMoveRotate = function ( event ){
+	function handleMouseDownRotate( event ) {
 
 		rotateStart.set( event.clientX, event.clientY );
 
