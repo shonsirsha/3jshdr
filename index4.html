@@ -5,11 +5,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
-        <script src="https://unpkg.com/three"></script>
-<script src="https://threejs.org/build/three.min.js"></script>
-<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/OrbitControls.js"></script>
-<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.module.js"></script> <!--RGBELoader-->
+    
 </head>
 
 	<body>
@@ -19,12 +15,10 @@
     </div>
 
 		
-
 		<script type="module">
 
 import * as THREE from 'https://threejs.org/build/three.module.js';
-
-import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js';
+import {OrbitControls} from 'https://threejs.org/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'https://threejs.org/examples/jsm/loaders/GLTFLoader.js';
 import { RGBELoader } from 'https://threejs.org/examples/jsm/loaders/RGBELoader.js';
 import { RoughnessMipmapper } from 'https://threejs.org/examples/jsm/utils/RoughnessMipmapper.js';
@@ -299,17 +293,25 @@ var cube = new THREE.Mesh( geometry, material );
         ssaoPass.output = parseInt(  SSAOPass.OUTPUT.Default );
 
 
-        // controls = new OrbitControls( camera, renderer.domElement );
-        // 				controls.addEventListener( 'change', render ); // use if there is no animation loop
+        controls = new OrbitControls( camera, renderer.domElement );
+        				controls.addEventListener( 'change', render ); // use if there is no animation loop
 
 
-		// 		controls.minDistance = 2;
-		// 		controls.maxDistance = 10
-		// 		controls.target.set( 0, 0, - 0.2 );
-				// controls.update();
-                document.addEventListener('mousemove', onDocumentMouseMove, false);
+				controls.minDistance = 2;
+				controls.maxDistance = 10
+                controls.target.set( 0, 0, - 0.2 );
+                controls.target = new THREE.Vector3( 0.31, 1.8, 0)
+                controls.update();
+
+
+                setTimeout(()=>{
+                    mouse.x
+                    document.addEventListener('mousemove', onDocumentMouseMove, false);
+
+                },5000)
 
 				window.addEventListener( 'resize', onWindowResize, false );
+				window.addEventListener( 'mousedown', onMouseDown, false );
 
 			}
 
@@ -354,23 +356,28 @@ function animate()
    
 }
 
-
+function onMouseDown(){
+    console.log(camera.rotation.x)
+}
             
             function onDocumentMouseMove(event) {
     event.preventDefault();
-   
 
-    mouse.x = ( event.clientX - windowHalf.x );
-    mouse.y = ( event.clientY - windowHalf.x );
+//     console.log("rotate x: "+ camera.rotation.x)
+//     console.log("rotate y: "+ camera.rotation.y)
+
+
+//     mouse.x = ( event.clientX - windowHalf.x );
+//     mouse.y = ( event.clientY - windowHalf.x );
     
-    target.x = ( 1 - mouse.x ) * 0.002;
-  target.y = ( 1 - mouse.y ) * 0.002;
+//     target.x = ( 1 - mouse.x ) * 0.0008;
+//   target.y = ( 1 - mouse.y ) * 0.0008;
   
-  camera.rotation.x += 0.4 * ( target.y - camera.rotation.x );
-  camera.rotation.y += 0.4 * ( target.x - camera.rotation.y );
+//   camera.rotation.x += 0.2 * ( target.y - camera.rotation.x );
+//   camera.rotation.y += 0.2 * ( target.x - camera.rotation.y );
 
-  requestAnimationFrame( animate );
-  renderer.render( scene, camera );
+//   requestAnimationFrame( animate );
+//   renderer.render( scene, camera );
   
 }
 
