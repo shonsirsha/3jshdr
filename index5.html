@@ -72,7 +72,7 @@ var cameraVertLimit = 0.3;
         cameraCenter.x = camera.position.x;
     cameraCenter.y = camera.position.y;
     camera.aspect = 2.0678513731825525
-		camera.zoom = 1.3;
+		camera.zoom = 1.41;
         camera.updateProjectionMatrix();
         camera.lookAt( 0.31, 1.8, 0 );
 
@@ -353,13 +353,15 @@ function updateCamera() {
     camera.position.x = cameraCenter.x + (cameraHorzLimit * mouse.x);
     camera.position.y = cameraCenter.y + (cameraVertLimit * mouse.y);
     camera.lookAt( 0.31, 1.8, 0 );
+    		camera.zoom = 1.41;
+
 
 }
             
             function onDocumentMouseMove(event) {
     event.preventDefault();
     console.log("ASDSA")
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.x = (event.clientX / window.innerWidth) * 3+1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
