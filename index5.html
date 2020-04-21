@@ -219,8 +219,8 @@ var cube = new THREE.Mesh( geometry, material );
 						// use of RoughnessMipmapper is optional
 						var roughnessMipmapper = new RoughnessMipmapper( renderer );
 
-						var loader = new GLTFLoader().setPath( 'test/' );
-						loader.load( 'Trennwand.glb', function ( gltf ) {
+						var loader = new GLTFLoader().setPath( 'fdpnew/' );
+						loader.load( 'FDP_Room_AO.glb', function ( gltf ) {
 
 							gltf.scene.traverse( function ( child ) {
 
@@ -241,42 +241,7 @@ var cube = new THREE.Mesh( geometry, material );
 
 						} );
 
-                        loader.load( 'Boden.glb', function ( gltf ) {
-                gltf.scene.traverse( function ( child ) {
-                    if ( child.isMesh ) {
-                        roughnessMipmapper.generateMipmaps( child.material );
-                    }
-                } );
-
-                scene.add( gltf.scene );
-                roughnessMipmapper.dispose();
-                render();
-            } );
-
-
-            loader.load( 'blaue-Wand.glb', function ( gltf ) {
-                gltf.scene.traverse( function ( child ) {
-                    if ( child.isMesh ) {
-                        roughnessMipmapper.generateMipmaps( child.material );
-                    }
-                } );
-
-                scene.add( gltf.scene );
-                roughnessMipmapper.dispose();
-                render();
-            } );
-
-            loader.load( 'rechte_Wand.glb', function ( gltf ) {
-                gltf.scene.traverse( function ( child ) {
-                    if ( child.isMesh ) {
-                        roughnessMipmapper.generateMipmaps( child.material );
-                    }
-                } );
-
-                scene.add( gltf.scene );
-                roughnessMipmapper.dispose();
-                render();
-            } );
+                  
 
 
 					} );
