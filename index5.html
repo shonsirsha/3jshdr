@@ -49,8 +49,6 @@ var cameraVertLimit = 0.3;
 
 			function init() {
 
-
-
 				container = document.getElementById( 'tet' );
 				class PLHelper {
   constructor( diameter , color , position ){
@@ -253,7 +251,7 @@ var cube = new THREE.Mesh( geometry, material );
 						var roughnessMipmapper = new RoughnessMipmapper( renderer );
 
 						var loader = new GLTFLoader()
-						loader.load( 'FDP_Room_Portrait.glb', function ( gltf ) {
+						loader.load( 'FDP_Room_Portrait_less_AO.glb', function ( gltf ) {
 
 							gltf.scene.traverse( function ( child ) {
 
@@ -342,7 +340,7 @@ var cube = new THREE.Mesh( geometry, material );
 function animate()
 {   
     updateCamera();
-    requestAnimationFrame ( animate );  
+    // requestAnimationFrame ( animate );  
     renderer.render (scene, camera);
 }
 
