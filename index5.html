@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -175,6 +176,38 @@ var cameraVertLimit = 0.3;
       scene.add(mesh,mesh2,mesh3,mesh4,mesh5,mesh6)
     });
 
+
+    // var loader2 = new THREE.TextureLoader();
+
+    // // load a resource
+    // loader2.load(
+    //     // resource URL
+    //     './img.jpg',
+    
+    //     // onLoad callback
+    //     function ( texture ) {
+    //         // in this example we create the material when the texture is loaded
+    //         var material = new THREE.MeshBasicMaterial( {
+    //             map: texture
+    //          } );
+    //          material.blending =  THREE.MultiplyBlending;
+    //     var geometry = new THREE.PlaneGeometry( 8,6);
+    
+    //     var plane = new THREE.Mesh( geometry, material );
+    //     plane.position.set( -3.4,3,0);
+    //          plane.rotation.y = THREE.Math.degToRad( 90 );
+    //     scene.add( plane );
+    //     },
+    
+    //     // onProgress callback currently not supported
+    //     undefined,
+    
+    //     // onError callback
+    //     function ( err ) {
+    //         console.error( 'An error happened.' );
+    //     }
+    // );
+
 	// fontLoader.load( 'https://raw.githubusercontent.com/shonsirsha/sandbox/master/DIN_CONDENSED_BOLD.json', function ( font ) {
   //     var geometry7 = new THREE.TextGeometry( 'Für innovative und vielfältige Mobilität', {
   //       font: font,
@@ -219,8 +252,8 @@ var cube = new THREE.Mesh( geometry, material );
 						// use of RoughnessMipmapper is optional
 						var roughnessMipmapper = new RoughnessMipmapper( renderer );
 
-						var loader = new GLTFLoader().setPath( 'fdpnew/' );
-						loader.load( 'FDP_Room_AO.glb', function ( gltf ) {
+						var loader = new GLTFLoader()
+						loader.load( 'FDP_Room_Portrait.glb', function ( gltf ) {
 
 							gltf.scene.traverse( function ( child ) {
 
@@ -325,15 +358,12 @@ function updateCamera() {
             
             function onDocumentMouseMove(event) {
     event.preventDefault();
-    console.log("ASDSA")
     mouse.x = (event.clientX / window.innerWidth) * 3+1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
 		</script>
 
-        <div>
-            asdas
-        </div>
+    
 	</body>
 </html>

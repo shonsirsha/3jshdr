@@ -43,11 +43,9 @@ var cameraVertLimit = 0.3;
 
 			init();
             render();
-            animate()
-
+animate();
 
 			function init() {
-
 
 
 				container = document.getElementById( 'tet' );
@@ -258,11 +256,47 @@ var cube = new THREE.Mesh( geometry, material );
                 gltf.scene.traverse( function ( child ) {
                     if ( child.isMesh ) {
                         roughnessMipmapper.generateMipmaps( child.material );
+                        console.log("ASUUUUU " + JSON.stringify(child.position));
+
+                        var loader2 = new THREE.TextureLoader();
+
+                // load a resource
+                loader2.load(
+                    // resource URL
+                    './img.jpg',
+
+                    // onLoad callback
+                    function ( texture ) {
+                        // in this example we create the material when the texture is loaded
+                        var material = new THREE.MeshBasicMaterial( {
+                            map: texture
+                        } );
+                        
+                    var geometry = new THREE.PlaneGeometry( 5, 2);
+
+                    var plane = new THREE.Mesh( geometry, material );
+                    plane.position.copy(child.position);
+
+                    scene.add( plane );
+                    },
+
+                    // onProgress callback currently not supported
+                    undefined,
+
+                    // onError callback
+                    function ( err ) {
+                        console.error( 'An error happened.' );
+                    }
+                );
+
                     }
                 } );
 
                 scene.add( gltf.scene );
                 roughnessMipmapper.dispose();
+
+
+                
                 render();
             } );
 
@@ -270,6 +304,8 @@ var cube = new THREE.Mesh( geometry, material );
                 gltf.scene.traverse( function ( child ) {
                     if ( child.isMesh ) {
                         roughnessMipmapper.generateMipmaps( child.material );
+
+                        
                     }
                 } );
 
@@ -343,26 +379,26 @@ var cube = new THREE.Mesh( geometry, material );
 
 function animate()
 {   
-    updateCamera();
+    // updateCamera();
     requestAnimationFrame ( animate );  
+
     renderer.render (scene, camera);
 }
 
 function updateCamera() {
     //offset the camera x/y based on the mouse's position in the window
-    camera.position.x = cameraCenter.x + (cameraHorzLimit * mouse.x);
-    camera.position.y = cameraCenter.y + (cameraVertLimit * mouse.y);
-    		camera.zoom = 1.41;
+    // camera.position.x = cameraCenter.x + (cameraHorzLimit * mouse.x);
+    // camera.position.y = cameraCenter.y + (cameraVertLimit * mouse.y);
+    // 		camera.zoom = 1.41;
 
 
 }
             
             function onDocumentMouseMove(event) {
-    event.preventDefault();
-    console.log("ASDSA")
-    mouse.x = (event.clientX / window.innerWidth) * 3+1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    camera.lookAt( mouse.x, mouse.y, 0 );
+    // event.preventDefault();
+    // console.log("ASDSA")
+    // mouse.x = (event.clientX / window.innerWidth) * 3+1;
+    // mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
 }
 
